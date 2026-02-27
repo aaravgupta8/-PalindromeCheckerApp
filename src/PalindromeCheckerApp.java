@@ -1,34 +1,46 @@
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
 import java.util.Stack;
 
 public class PalindromeCheckerApp {
-    public static void main(String[] args) {
 
-        String input = "madam";
+    public static boolean isPalindrome(String input) {
 
+        // Normalize input (remove spaces, lower case)
+        input = input.replaceAll("\\s+", "").toLowerCase();
+
+        Queue<Character> queue = new LinkedList<>();
         Stack<Character> stack = new Stack<>();
 
-        // Push all characters into the stack
-        for (int i = 0; i < input.length(); i++) {
-            stack.push(input.charAt(i));
+        // Enqueue and Push
+        for (char c : input.toCharArray()) {
+            queue.add(c);     // FIFO
+            stack.push(c);    // LIFO
         }
 
-        boolean isPalindrome = true;
-
-        // Pop from stack and compare with original string
-        for (int i = 0; i < input.length(); i++) {
-            char poppedChar = stack.pop();
-
-            if (input.charAt(i) != poppedChar) {
-                isPalindrome = false;
-                break;
+        // Compare dequeue vs pop
+        while (!queue.isEmpty()) {
+            if (!queue.remove().equals(stack.pop())) {
+                return false;
             }
         }
 
-        // Print result
-        if (isPalindrome) {
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a string: ");
+        String input = scanner.nextLine();
+
+        if (isPalindrome(input)) {
             System.out.println("Palindrome");
         } else {
-            System.out.println("Not Palindrome");
+            System.out.println("Not a Palindrome");
         }
+
+        scanner.close();
     }
 }
