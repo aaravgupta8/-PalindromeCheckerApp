@@ -1,19 +1,15 @@
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
-        System.out.println("Welcome to Palindrome Checker App\n");
-
         String ip = "madam";
-        boolean isPalindrome = true;
-        for(int i=0; i<ip.length()/2; i++) {
-            if(ip.charAt(i) != ip.charAt(ip.length()-i-1)) {
-                isPalindrome = false;
-            }
+        String r_ip = "";
+        for(int i=ip.length()-1; i>=0; i--) {
+            r_ip += String.valueOf(ip.charAt(i));
         }
 
-        if(isPalindrome) {
-            System.out.println("The input is a palindrome!");
+        if(ip.equals(r_ip)) {
+            System.out.println("ip string is palindrome");
         } else {
-            System.out.println("The input is NOT palindrome!");
+            System.out.println("ip string is not a palindrome");
         }
     }
 }
